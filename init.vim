@@ -23,7 +23,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'romgrk/barbar.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'f-person/git-blame.nvim'
 call plug#end()
@@ -34,8 +33,7 @@ colorscheme nord
 syntax on
 set number
 set cursorline
-set cc=80
-lua require'barbar'.setup {sidebar_filetypes = {['neo-tree'] = {event = 'BufWipeout'}} } 
+set cc=80 
 au UIEnter * Neotree
 set statusline=\ %{GetGitBranch()}\ \|\ %F\ \|\ %Y\ \|\ %m%=\|\ %{&fileencoding?&fileencoding:&encoding}\ \|\ ascii:\ %b\ \|\ hex:\ 0x%B\ \|\ %l:%c\ \|\ percent:\ %p%%\ 
 set laststatus=3
@@ -44,7 +42,8 @@ function! GetGitBranch()
   return strlen(git_branch) > 0 ? git_branch : '---'
 endfunction
 au BufEnter * setlocal statusline=\ %{GetGitBranch()}\ \|\ %F\ \|\ %Y\ \|\ %m%=\|\ %{&fileencoding?&fileencoding:&encoding}\ \|\ ascii:\ %b\ \|\ hex:\ 0x%B\ \|\ %l:%c\ \|\ percent:\ %p%%\ 
-
+set showtabline=2
+au UIEnter * botright split | terminal
 " Search
 set showmatch
 set hlsearch
@@ -81,3 +80,5 @@ nnoremap tb :Telescope buffers<cr>
 nnoremap th :Telescope help_tags<cr>
 nnoremap tr :Neotree<cr>
 nnoremap 54 <C-w>l
+nnoremap <C-`> :tabnew<cr>:terminal $SHELL -c "cd $PWD && $SHELL"<cr>
+nnoremap ` :terminal $SHELL -c "cd $PWD && $SHELL"<cr>

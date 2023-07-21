@@ -60,6 +60,7 @@ set autoindent
 set nowrap
 filetype plugin on
 filetype plugin indent on
+set foldmethod=syntax
 " set spell
 
 " Editor's behavior
